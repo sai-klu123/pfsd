@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: url("https://rb.gy/jn88br") center fixed;
+      background-size: 100% 100%;
+      opacity: 0.8;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card {
+      background-color: #7b9173;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    form {
+      width: 300px;
+      padding: 20px;
+      background-color: #f4f4f4;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 16px;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #292128;
+      color: white;
+      padding: 10px 15px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #056b57;
+    }
+
+    .error-message {
+      color: red;
+      margin-top: 10px;
+    }
+
+    .popup-message {
+      color: red;
+      font-size: 12px;
+    }
+   h1 {
+      color: #07e8e1;
+      margin-bottom: 30px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <form method="post" id="login-form">
+      <h1 style="color: #167475;">Login</h1>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email" class="form-control" required onfocus="clearMessage('popup-message-username')">
+        <div class="popup-message" id="popup-message-username"></div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" class="form-control" required onfocus="clearMessage('popup-message-password')">
+        <div class="popup-message" id="popup-message-password"></div>
+      </div>
+
+      <button type="button" onclick="authenticateUser()">Login</button>
+
+      <div class="error-message" id="error-message"></div>
+    </form>
+  </div>
+
+  <script>
+   function authenticateUser() {
+    var form = document.getElementById('login-form');
+    var formData = new FormData(form);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/authenticate_user/');  // Update the URL to your Django view URL
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE) {
+            var response = JSON.parse(xhr.responseText);
+            var errorMessage = document.getElementById('error-message');
+            errorMessage.innerText = '';
+
+            if (response.success) {
+                if (response.user_type == 'admin') {
+                    window.location.href = "{% url 'admincall' %}";
+                } else {
+                    window.location.href = "http://localhost:63342/PFSD-SDP/ecommerceProject/templates1/navBar2.html?";
+                }
+            } else {
+                errorMessage.innerText = response.message;
+            }
+        }
+    };
+    xhr.send(formData);
+}
+
+
+    function clearMessage(popupId) {
+      document.getElementById(popupId).innerText = ''; // Clear popup message on focus
+    }
+  </script>
+</body>
+</html>

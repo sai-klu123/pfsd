@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>View Users - TRENDY CART Admin Dashboard</title>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background: url("{% static 'aboutbackground1.jpg' %}") center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      color: #333; /* Text color for better readability */
+    }
+
+    header {
+      background-color: #333;
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    /* Styling for admin navbar */
+    .admin-nav {
+      background-color: #333;
+      padding: 10px;
+      text-align: right; /* Align navbar items to the right */
+    }
+
+    .admin-nav ul {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: flex-end; /* Align navbar items to the right */
+    }
+
+    .admin-nav ul li {
+      margin-left: 20px; /* Adjust margin to separate navbar items */
+    }
+
+    .admin-nav ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+      color: #fffcfc;/* Add some space between header and table */
+    }
+
+    .table-container {
+      margin: 0 auto; /* Center the container */
+      max-width: 800px; /* Set maximum width to control table width */
+      padding: 0 10px; /* Add space on both sides */
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+    }
+
+    th, td {
+      padding: 12px 15px; /* Increase padding for better spacing */
+      text-align: left;
+      border-bottom: 1px solid #ddd;
+    }
+
+    th {
+      background-color: #9baecc;
+      font-weight: bold; /* Make header text bold */
+    }
+
+    tr:nth-child(even) {
+      background-color: #5d7371; /* Lighter background for even rows */
+    }
+   tr:nth-child(odd) {
+      background-color: #a690a3; /* Lighter background for even rows */
+    }
+    tr:hover {
+      background-color: #9baecc; /* Light background color on hover */
+    }
+     .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: #fff;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #555;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>TRENDY CART Admin Dashboard</h1>
+  </header>
+
+  <!-- Admin Navbar -->
+  <nav class="admin-nav">
+    <ul>
+      <li><a href="{% url 'admincall' %}">Dashboard</a></li>
+      <!-- Dropdown for User Management -->
+      <li class="dropdown">
+        <a href="#" class="dropbtn">User Management</a>
+        <div class="dropdown-content">
+          <a href="{% url 'show_user' %}">View Users</a>
+          <a href="{% url 'add_user' %}">Add User</a>
+          <a href="{% url 'show_users' %}">Remove User</a>
+          <!-- Add more user management options as needed -->
+        </div>
+      </li>
+      <li><a href="{% url 'admincall' %}">API Management</a></li>
+      <li><a href="{% url 'admincall' %}">Email Management</a></li>
+      <li><a href="{% url 'admincall' %}">Website Management</a></li>
+      <!-- Add more links as needed -->
+    </ul>
+  </nav>
+
+  <h1>View Users</h1>
+
+  <div class="table-container">
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone Number</th>
+        <th>Password</th>
+        <!-- Add more columns as needed -->
+      </tr>
+      <!-- Fetch and loop through user signup data from database -->
+      {% for user in users %}
+      <tr>
+        <td>{{ user.name }}</td>
+        <td>{{ user.email }}</td>
+        <td>{{ user.phonenumber }}</td>
+        <td>{{ user.password }}</td>
+        <!-- Add more columns as needed -->
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+</body>
+</html>

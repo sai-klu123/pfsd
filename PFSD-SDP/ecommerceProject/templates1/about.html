@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRENDY CART</title>
+    {% load static %}
+<style>
+  body {
+    font-family: 'Times New Roman', serif;
+    background: url("{% static 'aboutbackground1.jpg' %}") center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header h1 {
+    margin: 0;
+  }
+
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  nav ul li {
+    margin-right: 20px;
+  }
+
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+  }
+
+  main {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    width: 300px;
+    margin: 20px;
+    position: absolute;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .card:hover::before {
+    opacity: 0.2;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    z-index: 10; /* Add this to bring the hovered card to the front */
+  }
+
+  .card img {
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+    z-index: 2;
+  }
+
+  .card:hover img {
+    transform: scale(1.05);
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+  }
+
+  .about-text {
+    font-size: 1.2rem;
+    color: #fff;
+    text-align: justify;
+  }
+
+.card {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    width: 300px;
+    margin: 20px;
+    position: absolute;
+    opacity: 0; /* Initially set opacity to 0 */
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.card:nth-child(1) {
+    top: 5%;
+    left: 50%;
+    z-index: 3;
+    animation: fall 1s ease forwards; /* Move animation here */
+    animation-delay: 3s; /* Delay the animation start */
+}
+
+.card:nth-child(2) {
+    top: 15%;
+    left: 25%;
+    z-index: 2;
+    animation: fall 1s ease forwards; /* Move animation here */
+    animation-delay: 1.5s; /* Delay the animation start */
+}
+
+.card:nth-child(3) {
+    top: 40%;
+    left: 40%;
+    z-index: 1;
+    animation: fall 1s ease forwards; /* Move animation here */
+    animation-delay: 2s; /* Delay the animation start */
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+  to {
+    width: 100%;
+  }
+}
+
+.about-text {
+  font-size: 1.2rem;
+  color: #fff;
+  text-align: justify;
+  max-width: 100%; /* Set maximum width */
+  max-height: 100%; /* Set maximum height */
+  overflow: auto; /* Allow overflow scrolling */
+}
+
+</style>
+</head>
+<body>
+<header>
+  <h1>TRENDY CART</h1>
+  <nav>
+    <ul>
+      <li><a href= "{% url 'navbar2call' %}";>Home</a></li>
+      <li><a href= "{% url 'aboutcall' %}";>About</a></li>
+      <li><a href= "{% url 'servicecall' %}";>Services</a></li>
+      <li><a href="#">Portfolio</a></li>
+     <li><a href= "{% url 'teamcall' %}">Team</a></li>
+     <li><a href= "{% url 'contactcall' %}";>ContactUs</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+ <div class="card">
+        <div class="card-content greeting">
+            <h2 class="typing-animation" data-text="About Us"></h2>
+            <p class="about-text typing-animation" data-text="Explore a world of choices with Our E-commerce Product Search and Price Comparison System. Uncover the best deals by effortlessly comparing prices from various online websites. Elevate your shopping savvy and make informed decisions at your fingertips!"></p>
+        </div>
+    </div>
+
+  <div class="card">
+    <img src="{% static 'aboutimage1.jpg' %}" alt="Image 1">
+  </div>
+
+  <div class="card">
+    <img src="{% static 'aboutimage2.jpg' %}" alt="Image 2">
+  </div>
+
+</main>
+
+<script>
+    const typingElements = document.querySelectorAll('.typing-animation');
+
+    typingElements.forEach(element => {
+        const text = element.getAttribute('data-text');
+        const duration = text.length * 50; // Adjust typing speed here
+
+        let i = 0;
+        const intervalId = setInterval(() => {
+            if (i < text.length) {
+                element.textContent += text.charAt(i);
+                i++;
+            } else {
+                clearInterval(intervalId);
+            }
+        }, duration / text.length);
+    });
+</script>
+</body>
+</html>

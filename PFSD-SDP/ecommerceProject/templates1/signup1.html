@@ -1,0 +1,153 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: url("https://rb.gy/8g4v5y") center fixed;
+            background-size: 100% 100%;
+            font-family: 'Times New Roman', serif;
+            opacity: 0.8;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card {
+            background-color:#45a049;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        form {
+            width: 100%;
+            max-width: 400px; /* Adjust the max-width as needed */
+            margin: 0 auto; /* Center the form */
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #4CAF50; /* Updated label color */
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 16px;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color:#3a394f; /* Updated button color */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049; /* Updated button hover color */
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+
+        .popup-message {
+            color: red;
+            font-size: 12px;
+        }
+
+        /* Additional styles from the existing code */
+        .container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #07e8e1; /* Updated heading color */
+            margin-bottom: 30px;
+        }
+
+        .form-control {
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        .btn-success {
+            background-color: #3a394f; /* Updated button color */
+            border: none;
+            padding: 10px 20px;
+        }
+
+        .btn-success:hover {
+            background-color: #5b877e; /* Updated button hover color */
+        }
+
+        h6 {
+            color: #6c757d;
+            text-align: center;
+        }
+        a{
+        text-align:right;
+        }
+    </style>
+</head>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card bg-dark text-white">
+                <div class="card-body">
+                    <form class="form-horizontal" action="{% url 'registerloginfunction' %}" method="POST">
+                        <fieldset>
+                            <h1 style="color: #167475;">Register</h1> <!-- Updated heading color -->
+
+                            <div class="form-group">
+                                <label for="name" style="color: #613f6e;"><b>Name</b></label> <!-- Updated label color -->
+                                <input type="text" id="name" name="name" class="form-control" placeholder="Enter your name" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" style="color:#613f6e;"><b>E-mail</b></label> <!-- Updated label color -->
+                                <input type="email" id="email" name="email" class="form-control" placeholder="Enter your email" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phonenumber" style="color: #613f6e;"><b>Phone number</b></label> <!-- Updated label color -->
+                                <input type="tel" id="phonenumber" name="phonenumber" class="form-control" placeholder="Enter a valid phone number" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="password" style="color: #613f6e;"><b>Password</b></label> <!-- Updated label color -->
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Enter your password" required>
+                            </div>
+
+                            <div class="form-group">
+                                <button class="btn btn-success" type="submit">Register</button>
+                                 <a href= "{%  url 'logincall' %}";><h5>LogIn?</h5></a>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<br><br>
+<div>
+</div>
+</html>

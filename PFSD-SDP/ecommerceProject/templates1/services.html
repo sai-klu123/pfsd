@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRENDY CART</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"> <style>
+  body {
+    font-family: 'Times New Roman', serif;
+    background: url("{% static 'aboutbackground1.jpg' %}") center fixed;
+    background-size: cover;
+    margin: 0;
+    padding: 0;
+  }
+
+  header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  header h1 {
+    margin: 0;
+  }
+
+  nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+  }
+
+  nav ul li {
+    margin-right: 20px;
+  }
+
+  nav ul li a {
+    color: white;
+    text-decoration: none;
+  }
+
+  main {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .card {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+    width: 300px;
+    margin: 20px;
+    position: absolute;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0));
+    pointer-events: none;
+    z-index: 1;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  .card:hover::before {
+    opacity: 0.2;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    z-index: 10; /* Add this to bring the hovered card to the front */
+  }
+
+  .card img {
+    width: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+    z-index: 2;
+  }
+
+  .card:hover img {
+    transform: scale(1.05);
+  }
+
+  .card-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+  }
+
+  .about-text {
+    font-size: 1.2rem;
+    color: #fff;
+    text-align: justify;
+  }
+
+  .card:nth-child(1) {
+    top: 5%;
+    left: 50%;
+    z-index: 3;
+  }
+
+  .card:nth-child(2) {
+    top: 15%; /* Adjust the positioning */
+    left: 25%; /* Adjust the positioning */
+    z-index: 2;
+  }
+
+  .card:nth-child(3) {
+    top: 40%; /* Adjust the positioning */
+    left: 40%; /* Adjust the positioning */
+    z-index: 1;
+  }
+
+.icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 2rem;
+    color: white;
+    opacity: 0.7;
+    transition: transform 0.3s ease-in-out;
+    z-index: 2;
+  }
+
+  .card:hover .icon {
+    transform: rotate(180deg); /* Rotate icon on hover */
+  }
+<!--  .icon {-->
+<!--    position: absolute;-->
+<!--    top: 10px;-->
+<!--    left: 10px;-->
+<!--    font-size: 2rem;-->
+<!--    color: white;-->
+<!--    opacity: 0.7;-->
+<!--    transition: transform 0.3s ease-in-out;-->
+<!--    z-index: 2;-->
+<!--    animation: dropIcon 1.5s ease-in-out forwards; /* Animation for dropping icon */-->
+<!--  }-->
+
+<!--  @keyframes dropIcon {-->
+<!--    0% {-->
+<!--      transform: translateY(-100%);-->
+<!--    }-->
+<!--    100% {-->
+<!--      transform: translateY(0);-->
+<!--    }-->
+<!--  }-->
+
+<!--  /* Additional styles for card content */-->
+<!--  .card-content h2 {-->
+<!--    font-size: 1.5rem;-->
+<!--    margin-bottom: 10px;-->
+<!--  }-->
+
+<!--  .card-content p {-->
+<!--    font-size: 1rem;-->
+<!--  }-->
+
+
+ .typed-text {
+    display: inline-block;
+    overflow: hidden; /* Important for clipping animation */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+
+  .typed-text span {
+    display: inline-block;
+    opacity: 0;
+    animation: typing 0.4s ease-in-out forwards;
+    animation-delay: 0.2s; /* Offset delay for each word */
+  }
+
+  @keyframes typing {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Adjust these styles as needed */
+  .typed-text h2 {
+    font-size: 1.5rem;
+  }
+
+  .typed-text p {
+    font-size: 1rem;
+  }
+
+  .bubbles-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    pointer-events: none; /* Prevent interaction with bubbles */
+    z-index: 9999; /* Ensure bubbles appear on top of other content */
+}
+
+/* Style for individual bubble */
+.bubble {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white */
+    width: 20px; /* Initial size */
+    height: 20px; /* Initial size */
+    border-radius: 50%; /* Make it round */
+    animation: bubbleAnimation 5s linear infinite; /* Adjust timing as needed */
+}
+
+/* Keyframes for bubble animation */
+@keyframes bubbleAnimation {
+    0% {
+        transform: translate(0, 0) scale(0); /* Start off invisible and small */
+    }
+    50% {
+        transform: translate(-200px, -200px) scale(1); /* Move up and left and increase size */
+    }
+    100% {
+        transform: translate(-400px, -400px) scale(2); /* Move further up and left and increase size more */
+        opacity: 0; /* Fade out */
+    }
+}
+
+/* Add styles for additional bubbles */
+.bubble:nth-child(2) {
+    animation-delay: 1s; /* Delay the animation of the second bubble */
+}
+
+    .moving-gif-container {
+    position: fixed;
+    bottom: -20px; /* Adjust as needed */
+    left: -100px; /* Initial position off the screen */
+    animation: moveGif 20s linear infinite, fadeIn 2s ease-in-out; /* Adjust timing as needed */
+    z-index: 999; /* Ensure it's above other content */
+  }
+
+  @keyframes moveGif {
+    0% {
+      left: -100px; /* Start off the screen */
+    }
+    100% {
+      left: calc(100% + 100px); /* Move to the right beyond the screen width */
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0; /* Start with opacity 0 */
+    }
+    100% {
+      opacity: 1; /* Fade in */
+    }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>TRENDY CART</h1>
+  <nav>
+    <ul>
+      <li><a href= "{% url 'navbar2call' %}">Home</a></li>
+      <li><a href= "{% url 'aboutcall' %}">About</a></li>
+      <li><a href= "{% url 'servicecall' %}">Services</a></li>
+     <li><a href= "{% url 'servicecall' %}">portfolio</a></li>
+      <li><a href= "{% url 'teamcall' %}">Team</a></li>
+      <li><a href= "{% url 'contactcall' %}">ContactUs</a></li>
+    </ul>
+  </nav>
+</header>
+<main>
+  <div class="card">
+    <i class="icon fas fa-search"></i> <div class="card-content">
+      <h2>
+        <span class="typed-text">
+          <span>Effortlessly</span> <span>search</span> <span>through</span>,
+        </span>
+      </h2>
+      <p class="about-text">
+        Compare prices across multiple online retailers to find the best deals.
+      </p>
+    </div>
+  </div>
+   <div class="card">
+    <i class="icon fas fa-dollar-sign"></i> <div class="card-content">
+      <h2>
+        <span class="typed-text">
+          <span>Compare</span> <span>prices</span> <span>across</span>
+        </span>
+      </h2>
+      <p class="about-text">
+        Compare prices across multiple online retailers to find the best deals.
+      </p>
+
+    </div>
+     <div class="bubbles-container">
+        <!-- You can add multiple divs for more bubbles -->
+        <div class="bubble"></div>
+       <div class="bubble"></div>
+       <div class="bubble"></div>
+       <div class="bubble"></div>
+
+    </div>
+  </div>
+        <div class="moving-gif-container">
+  <img src="{% static 'cart2-unscreen.gif' %}" width="300" height="300">
+</div>
+
+</main>
+</body>
+</html>

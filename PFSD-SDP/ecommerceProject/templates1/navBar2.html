@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRENDY CART</title>
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background: url("{% static 'aboutbackground1.jpg' %}") center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            color: white;
+            margin: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        main {
+            display: flex;
+        }
+
+        .left-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            min-height: 100vh;
+        }
+
+        .right-container {
+            flex: 1;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .right-container img {
+            max-width: 300px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .right-container img:hover {
+            transform: scale(1.1);
+        }
+
+        .content {
+            max-width: 600px;
+            color: #03fce3;
+        }
+
+        @keyframes moneyFall {
+            0% {
+                transform: translateY(-100px) rotate(0deg);
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+            }
+        }
+
+        .falling-money {
+            position: absolute;
+            top: -10px;
+            left: calc(50% - 5px);
+            animation: moneyFall 5s linear infinite;
+            pointer-events: none;
+        }
+
+        .falling-money img {
+            width: 10px;
+            height: auto;
+        }
+
+        .searchbar {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .searchbar input[type="text"] {
+            padding: 10px;
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .searchbar input[type="text"]:focus {
+            border-color: #03fce3;
+        }
+
+        .searchbar button[type="submit"] {
+            padding: 10px 20px;
+            background-color: #03fce3;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .searchbar button[type="submit"]:hover {
+            background-color: #02c7bb;
+        }
+
+        .logo {
+            width: 80px;
+        }
+
+        .userpic {
+            width: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        ul li {
+            display: inline-block;
+            margin-right: 20px;
+        }
+
+        ul li:last-child {
+            margin-right: 0;
+        }
+
+        ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
+
+        .submenu-wrap {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 320px;
+            background: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .submenu {
+            padding: 10px;
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+        }
+
+        .user-info img {
+            width: 60px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .user-info h3 {
+            font-weight: 500;
+            margin: 0;
+        }
+
+        .submenu-link {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: #333;
+            margin: 12px 0;
+        }
+
+        .submenu-link p {
+            width: 100%;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .submenu-link img {
+            width: 40px;
+            background: #f4f4f4;
+            border-radius: 50%;
+            padding: 8px;
+            margin-right: 10px;
+        }
+
+        .submenu-link span {
+            font-size: 22px;
+        }
+
+        .submenu-link:hover {
+            transform: translateX(5px);
+        }
+
+        .submenu-link:hover p {
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>TRENDY CART</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'navbar2call' %}">Home</a></li>
+            <li><a href="{% url 'aboutcall' %}">About</a></li>
+            <li><a href="{% url 'servicecall' %}">Services</a></li>
+            <li><a href="{% url 'signupcall' %}">Portfolio</a></li>
+            <li><a href="{% url 'teamcall' %}">Team</a></li>
+            <li><a href="{% url 'contactcall' %}">ContactUs</a></li>
+        </ul>
+        <ul>
+           <li>
+    <button type="contained" style="background-color: #007bff;"><a href="http://localhost:63342/PFSD-SDP/ecommerceProject/templates1/loginPage.html?" style="color:white;">Login</a></button>
+</li>
+<li>
+    <button type="submit" style="background-color: #28a745;"><a href="http://localhost:63342/PFSD-SDP/ecommerceProject/templates1/signup1.html?" style="color:white;">Signup</a></button>
+</li>
+            <li>
+                <div class="submenu-wrap" id="submenu">
+                    <div class="submenu">
+                        <div class="user-info">
+                            <img src="{% static 'money.jpg' %}" alt="User input input ">
+                            <h3>User Name</h3>
+                        </div>
+                        <hr>
+                        <a href="#" class="submenu-link">
+                            <img src="{% static 'img.png' %}" alt="Profile">
+                            <p>Edit Profile<span>&rarr;</span></p>
+                        </a>
+                        <a href="#" class="submenu-link">
+                            <img src="{% static 'img.png' %}" alt="Settings">
+                            <p>Settings and Privacy<span>&rarr;</span></p>
+                        </a>
+                        <a href="#" class="submenu-link">
+                            <img src="{% static 'img.png' %}" alt="Help">
+                            <p>Help and Support<span>&rarr;</span></p>
+                        </a>
+                        <a href="#" class="submenu-link">
+                            <img src="{% static 'img.png' %}" alt="Logout">
+                            <p>Logout<span>&rarr;</span></p>
+                        </a>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="left-container">
+        <div class="content">
+            <h1>TRENDY CART - "Find Your Perfect Price Match at Trendy Cart: Where Every Penny Counts!"</h1>
+            <div class="searchbar">
+                <input type="text" placeholder="Search..." />
+                <button type="submit">Search</button>
+            </div>
+        </div>
+    </div>
+    <div class="right-container">
+        <img src="{% static 'price-comparison-removebg-preview.png' %}" alt="Price Comparison" />
+    </div>
+</main>
+<script>
+    function toggleMenu() {
+        var submenu = document.getElementById("submenu");
+        submenu.classList.toggle("open-menu");
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static%}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add User - TRENDY CART Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: url("{% static 'aboutbackground1.jpg' %}") center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: #333; /* Text color for better readability */
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        /* Styling for admin navbar */
+        .admin-nav {
+            background-color: #333;
+            padding: 10px;
+            text-align: right; /* Align navbar items to the right */
+        }
+
+        .admin-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: flex-end; /* Align navbar items to the right */
+        }
+
+        .admin-nav ul li {
+            margin-left: 20px; /* Adjust margin to separate navbar items */
+        }
+
+        .admin-nav ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+            color: #fffcfc;/* Add some space between header and form */
+        }
+
+        .form-container {
+            margin: 0 auto; /* Center the container */
+            max-width: 500px; /* Set maximum width to control form width */
+            padding: 20px; /* Add space around the form */
+            background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1); /* Add shadow for depth */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            margin-bottom: 15px;
+        }
+
+        input[type="submit"] {
+            background: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 3px;
+        }
+
+        input[type="submit"]:hover {
+            background: #0056b3;
+        }
+        .dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #333;
+      min-width: 160px;
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      color: #fff;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #555;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>TRENDY CART Admin Dashboard</h1>
+    </header>
+
+    <!-- Admin Navbar -->
+    <nav class="admin-nav">
+        <ul>
+            <li><a href="{% url 'admincall' %}">Dashboard</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropbtn">User Management</a>
+                <div class="dropdown-content">
+                    <a href="{% url 'show_user' %}">View Users</a>
+                    <a href="{% url 'add_user' %}">Add User</a>
+                    <a href="{% url 'show_users' %}">Remove User</a>
+                    <!-- Add more user management options as needed -->
+                </div>
+            </li>
+            <li><a href="{% url 'admincall' %}">API Management</a></li>
+            <li><a href="{% url 'admincall' %}">Email Management</a></li>
+            <li><a href="{% url 'admincall' %}">Website Management</a></li>
+            <!-- Add more links as needed -->
+        </ul>
+    </nav>
+
+    <h1>Add User</h1>
+
+    <div class="form-container">
+        <form method="POST" action="{% url 'add_user' %}">
+            {% csrf_token %}
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="phonenumber">Phone Number:</label>
+            <input type="text" id="phonenumber" name="phonenumber" required>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <input type="submit" value="Add User">
+        </form>
+    </div>
+
+</body>
+
+</html>

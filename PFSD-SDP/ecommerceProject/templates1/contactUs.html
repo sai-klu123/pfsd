@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRENDY CART</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background: url("{% static 'aboutbackground1.jpg' %}") center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+            color: #333; /* Adjust default text color */
+        }
+
+        header {
+            background-color: #444; /* Adjust header background color */
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: #fff; /* Adjust nav link color */
+            text-decoration: none;
+        }
+
+        main {
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .card {
+            background-color: #fafafa; /* Adjust card background color */
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            margin: auto;
+        }
+
+        .card label {
+            display: block;
+            margin-bottom: 10px;
+            color: #777; /* Adjust label text color */
+        }
+
+        .card input,
+        .card textarea {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            resize: none; /* Disable textarea resizing */
+            color: #555; /* Adjust input text color */
+        }
+
+        .card button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        .card button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>TRENDY CART</h1>
+    <nav>
+        <ul>
+            <li><a href="{% url 'navbar2call' %}">Home</a></li>
+            <li><a href="{% url 'aboutcall' %}">About</a></li>
+            <li><a href="{% url 'servicecall' %}">Services</a></li>
+            <li><a href="{% url 'servicecall' %}">Portfolio</a></li>
+            <li><a href="{% url 'teamcall' %}">Team</a></li>
+            <li><a href="{% url 'contactcall' %}">ContactUs</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div class="container">
+        <!-- Feedback Form Section -->
+        <div class="card">
+            <form id="feedbackForm">
+                 {% csrf_token %}
+                <label for="name" style="color:#71888a;">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email" style="color: #71888a;">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="phonenumber" style="color: #71888a;">PhoneNumber:</label>
+                <input type="number" id="phonenumber" name="phonenumber" required>
+
+                <label for="subject" style="color: #71888a;">Subject:</label>
+                <textarea id="subject" name="subject" rows="4" required></textarea>
+
+                <label for="message" style="color: #71888a;">Message:</label>
+                <textarea id="message" name="message" rows="4" required></textarea>
+
+                <button type="submit"><i class="fas fa-paper-plane"></i> Submit </button>
+            </form>
+        </div>
+    </div>
+</main>
+<script>
+    document.getElementById('feedbackForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the default form submission
+
+    // Get form data
+    var formData = new FormData(this);
+
+    // You can process the form data here (e.g., send it to the server using AJAX)
+    // For example:
+    fetch('{% url "feedbackformfunction" %}', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.text();
+        }
+        throw new Error('Network response was not ok.');
+    })
+    .then(data => {
+        console.log(data); // Log the response from the server
+        // Optionally, you can display a success message to the user
+        alert('Feedback submitted successfully!');
+        // Reset the form
+        document.getElementById('feedbackForm').reset();
+    })
+    .catch(error => {
+        console.error('There was a problem with your fetch operation:', error);
+        // Optionally, you can display an error message to the user
+        alert('There was an error submitting your feedback. Please try again later.');
+    });
+});
+
+</script>
+</body>
+</html>

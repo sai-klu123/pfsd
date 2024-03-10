@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TRENDY CART</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Times New Roman', serif;
+            background: url("{% static 'aboutbackground1.jpg' %}") center fixed;
+            background-size: cover;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        nav ul li {
+            margin-right: 20px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        main {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .team-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+        }
+
+        .team-member {
+            margin: 20px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeInLeft 1s forwards;
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(50%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(-60%);
+            }
+        }
+
+        .team-member:nth-child(1) {
+            animation-delay: 0s; /* Animation for 2200032904 */
+        }
+
+        .team-member:nth-child(2) {
+            animation-delay: 1s; /* Animation for 2200033073 */
+        }
+
+        .team-member:nth-child(3) {
+            animation-delay: 2s; /* Animation for 2200033071 */
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-50%);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(100%);
+            }
+        }
+
+        .team-member-right {
+            animation: fadeInRight 1s forwards;
+            animation-delay: 2s; /* Adjusted to match the third team member */
+        }
+
+        .team-member:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .member-image img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .member-image img:hover {
+            transform: scale(1.1);
+        }
+
+        .member-info h3 {
+            margin: 10px 0;
+        }
+
+        .member-info p {
+            color: #888;
+        }
+
+        .linkedin-icon {
+            color: #0077B5;
+            font-size: 24px;
+            transition: color 0.3s ease;
+        }
+
+        .linkedin-icon:hover {
+            color: #00467F;
+        }
+
+        #new-team-member {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: absolute;
+            top: 0%;
+            left: 30%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: fadeInCenter 3s forwards;
+        }
+
+        @keyframes fadeInCenter {
+            from {
+                opacity: 0;
+                transform: translateY(-100%);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0%);
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>TRENDY CART</h1>
+    <nav>
+        <ul>
+            <li><a href= "{% url 'navbar2call' %}">Home</a></li>
+            <li><a href= "{% url 'aboutcall' %}">About</a></li>
+            <li><a href= "{% url 'servicecall' %}">Services</a></li>
+            <li><a href= "{% url 'servicecall' %}">Portfolio</a></li>
+            <li><a href= "{% url 'teamcall' %}">Team</a></li>
+            <li><a href= "{% url 'contactcall' %}">ContactUs</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <!-- Team Section -->
+    <div class="team-section">
+        <div class="team-member">
+            <div class="member-image">
+                <img src="{% static 'aboutimage2.jpg' %}" alt="Image 2">
+            </div>
+            <div class="member-info">
+                <h3>Ch.Bhavana Nithya</h3>
+                <h3> Id: 2200032904</h3>
+                <p>Studying Computer Science & Engineering </p>
+                <p> 2nd year , at KL University</p>
+                <p>Email: 2200032904@kluniversity.in</p>
+                <a href="https://www.linkedin.com/in/bhavana-nithya-chinta-989ab428a/" target="_blank"><i class="fab fa-linkedin linkedin-icon"></i></a>
+            </div>
+        </div>
+        <div class="team-member team-member-right">
+            <div class="member-image">
+                <img src="{% static 'aboutimage2.jpg' %}" alt="Image 2">
+            </div>
+            <div class="member-info">
+                <h3>A. Sri Dharani</h3>
+                <h3> Id: 2200033073</h3>
+                <p>Studying Computer Science & Engineering </p>
+                <p> 2nd year , at KL University</p>
+                <p>Email: 2200033073@kluniversity.inp</p>
+                <a href="https://www.linkedin.com/in/avutu-sri-dharani-7a6ab128a/" target="_blank"><i class="fab fa-linkedin linkedin-icon"></i> </a>
+            </div>
+        </div>
+        <div class="team-member" id="new-team-member">
+            <div class="member-image">
+                <img src="{% static 'team boy.jpg' %}" alt="Image 3">
+            </div>
+            <div class="member-info">
+                <h3>R. Navdeep Sai</h3>
+                <h3> Id: 2200033071</h3>
+                <p>Studying Computer Science & Engineering </p>
+                <p> 2nd year , at KL University</p>
+                <p>Email: 2200033071@kluniversity.inp</p>
+                <a href="https://www.linkedin.com/in/avutu-sri-dharani-7a6ab128a/" target="_blank"><i class="fab fa-linkedin linkedin-icon"></i> </a>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
